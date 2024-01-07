@@ -16,7 +16,7 @@ from spacy.lang.zh import Chinese
 from tokenizers import Tokenizer
 
 from TTS.tts.layers.xtts.zh_num2words import TextNorm as zh_num2words
-
+from TTS.tts.layers.xtts.ko_num2words import TextNorm as ko_num2words
 
 def get_spacy_lang(lang):
     if lang == "zh":
@@ -522,6 +522,8 @@ def _expand_number(m, lang="en"):
 def expand_numbers_multilingual(text, lang="en"):
     if lang == "zh":
         text = zh_num2words()(text)
+    elif lang == 'ko':
+        text = ko_num2words()(text)
     else:
         if lang in ["en", "ru"]:
             text = re.sub(_comma_number_re, _remove_commas, text)
